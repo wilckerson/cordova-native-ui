@@ -35,22 +35,17 @@ var app = {
     onDeviceReady: function () {
         app.receivedEvent('deviceready');
 
+      
+        
         var btnPlugin = document.getElementById("btnPlugin");
         btnPlugin.addEventListener("click", function () {
-            window.echo = function (str, callback) {
-                cordova.exec(callback, function (err) {
-                    callback('Nothing to echo.');
-                }, "Echo", "echo", [str]);
-            };
-
-            window.echo("TEste", function () {
-                //alert("sucess");
-                
-                cordova.exec(function(){ console.log("OK");}, function (err) {
-                  console.log("Erro");
-                }, "Echo", "nativeAlert", ["Success"]);
-                
-            });
+            
+            NativeUI.nativeAlert("Fired by Javascript");
+            
+              NativeUI.addButton("Created by JS",function(){
+            alert("Fired by Native");   
+        });
+            
         }, false);
 
 

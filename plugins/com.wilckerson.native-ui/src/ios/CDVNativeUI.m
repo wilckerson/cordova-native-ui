@@ -9,7 +9,7 @@
     NSString* msg = [command.arguments objectAtIndex:0];
     
  
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"Nativer Alert"
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"Native Alert"
                                              message:msg
                                              delegate:self
                                              cancelButtonTitle: @"OK"
