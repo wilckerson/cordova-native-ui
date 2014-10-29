@@ -72,6 +72,7 @@
 #endif
     self.window.autoresizesSubviews = YES;
 
+    
 #if __has_feature(objc_arc)
         self.viewController = [[MainViewController alloc] init];
 #else
@@ -85,7 +86,9 @@
     // NOTE: To customize the view's frame size (which defaults to full screen), override
     // [self.viewController viewWillAppear:] in your view controller.
 
+    //self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController: self.viewController];
     self.window.rootViewController = self.viewController;
+    
     [self.window makeKeyAndVisible];
 
     return YES;
