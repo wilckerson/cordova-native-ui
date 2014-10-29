@@ -1,4 +1,5 @@
-var exec = require("cordova/exec");
+cordova.define("com.wilckerson.native-ui.NativeUI", function (require, exports, module) {
+
     var NativeUI = {
         init: function () {
 
@@ -66,3 +67,6 @@ var exec = require("cordova/exec");
     //document.addEventListener("NativeEvent" ,NativeUI.nativeEvent, false );
 
     module.exports = NativeUI;
+
+
+});

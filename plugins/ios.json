@@ -5,15 +5,6 @@
     },
     "config_munge": {
         "files": {
-            "framework": {
-                "parents": {
-                    "ImageIO.framework": [],
-                    "CoreLocation.framework": [],
-                    "CoreGraphics.framework": [],
-                    "AssetsLibrary.framework": [],
-                    "MobileCoreServices.framework": []
-                }
-            },
             "config.xml": {
                 "parents": {
                     "/*": [
@@ -22,11 +13,6 @@
                             "count": 1
                         }
                     ]
-                }
-            },
-            "*-Info.plist": {
-                "parents": {
-                    "NSLocationWhenInUseUsageDescription": []
                 }
             }
         }

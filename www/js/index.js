@@ -37,15 +37,17 @@ var app = {
 
       
         
-        var btnPlugin = document.getElementById("btnPlugin");
+       var btnPlugin = document.getElementById("btnPlugin");
         btnPlugin.addEventListener("click", function () {
-            
-            NativeUI.nativeAlert("Fired by Javascript");
-            
-              NativeUI.addButton("Created by JS",function(){
-            alert("Fired by Native");   
-        });
-            
+//            
+            alert("click");
+            NativeUI.initView();
+//            NativeUI.nativeAlert("Fired by Javascript");
+//            
+//              NativeUI.addButton("Created by JS",function(){
+//            alert("Fired by Native");   
+//        });
+//            
         }, false);
 
 
