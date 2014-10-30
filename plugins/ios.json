@@ -14,11 +14,17 @@
                         }
                     ]
                 }
+            },
+            "framework": {
+                "parents": {
+                    "AssetsLibrary.framework": [],
+                    "MobileCoreServices.framework": []
+                }
             }
         }
     },
     "installed_plugins": {
-        "com.wilckerson.native-ui": {
+        "com.wilckerson.native_ui": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     },

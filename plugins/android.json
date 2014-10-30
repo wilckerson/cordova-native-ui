@@ -7,7 +7,12 @@
         "files": {
             "res/xml/config.xml": {
                 "parents": {
-                    "/*": []
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"NativeUI\"><param name=\"android-package\" value=\"com.wilckerson.native_ui.NativeUI\" /></feature>",
+                            "count": 1
+                        }
+                    ]
                 }
             },
             "AndroidManifest.xml": {
@@ -18,7 +23,7 @@
         }
     },
     "installed_plugins": {
-        "com.wilckerson.native-ui": {
+        "com.wilckerson.native_ui": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     },
