@@ -7,12 +7,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentManager.OnBackStackChangedListener;
 import android.app.FragmentTransaction;
+//import android.app.Fragment;
+import android.app.FragmentManager;
+//import android.app.FragmentManager.OnBackStackChangedListener;
+//import android.app.FragmentTransaction;
+
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +25,16 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 
 public class NativeUI extends CordovaPlugin {
     
+	Fragment frag;
+	Fragment frag2;
+	LinearLayout fragContainer;
+	FragmentManager fm;
+	
      @Override
         public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
             if (action.equals("initView")) {
@@ -36,9 +48,9 @@ public class NativeUI extends CordovaPlugin {
         private void initView(CallbackContext callbackContext) {
             
         	//new AlertDialog.Builder(this.cordova.getActivity()).setTitle("Native Alert").show();
-        	Activity activity = this.cordova.getActivity();
+        	final Activity activity = this.cordova.getActivity();
         	
-        	final FragmentManager fm = activity.getFragmentManager();
+        	  fm = activity.getFragmentManager();
 //        	fm.addOnBackStackChangedListener(new OnBackStackChangedListener(){
 //
 //				@Override
@@ -49,14 +61,35 @@ public class NativeUI extends CordovaPlugin {
 //				}
 //        	});
         	
-             
-        	
-            final ViewGroup rootElement = (ViewGroup)activity.getWindow().getDecorView().findViewById(android.R.id.content);
-            if(rootElement != null)
+            //final ViewGroup rootElement = (ViewGroup)activity.getWindow().getDecorView().findViewById(android.R.id.content);
+            
+           
+            
+            //if(rootElement != null)
             {
-            	Fragment frag = new Fragment(){
+            	
+            	//fragContainer = new LinearLayout(activity); 
+            	//fragContainer.setId(999999);
+                //rootElement.addView(fragContainer);
+                
+//                Button btn = new Button(activity);
+//              btn.setText("Botao Nativo");
+//              fragContainer.addView(btn);
+//              
+//              Button btn2 = new Button(activity);
+//              btn2.setText("Botao Nativo 2");
+//              fragContainer.addView(btn2);
+              
+            	
+            	frag = new Fragment(){
             		@Override
             		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            			
+//           			if(frag2 != null){
+//           				activity.getFragmentManager().beginTransaction().remove(frag2).commit();
+//           			}
+           			
+           			RelativeLayout fragView = new RelativeLayout(activity);
             			
             			Button btn = new Button(container.getContext());
                         btn.setText("Botao Nativo");
@@ -64,14 +97,20 @@ public class NativeUI extends CordovaPlugin {
                             ViewGroup.LayoutParams.WRAP_CONTENT,
                                 ViewGroup.LayoutParams.WRAP_CONTENT));
                         
+                        fragView.addView(btn);
+                        
                         btn.setOnClickListener(new OnClickListener() {
 							
 							@Override
 							public void onClick(View arg0) {
 								
-								Fragment frag2 = new Fragment(){
+								frag2 = new Fragment(){
 				            		@Override
 				            		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+				            			
+				            			RelativeLayout fragView2 = new RelativeLayout(activity);
+				            			
+				            			
 				            			
 				            			Button btn = new Button(container.getContext());
 				                        btn.setText("Botao Nativo Fragment 2");
@@ -79,35 +118,37 @@ public class NativeUI extends CordovaPlugin {
 				                            ViewGroup.LayoutParams.WRAP_CONTENT,
 				                                ViewGroup.LayoutParams.WRAP_CONTENT));
 				                        
-				                        container.addView(btn);
+				                        fragView2.addView(btn);
 				            			
-				            			return super.onCreateView(inflater, container, savedInstanceState);
+				            			return fragView2;
 				            		}
 				            	};
 				            	
 				            	//FragmentManager fm = activity.getFragmentManager();
 				                FragmentTransaction ft = fm.beginTransaction();
-				                 
-				                ft.replace(rootElement.getId(),frag2);
+				                
+				                ft.replace(android.R.id.content,frag2);
+				                
+				                //ft.remove(frag);//.add(fragContainer)
 				                ft.addToBackStack(null);
-				                //ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+				                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 				                ft.commit();
 							}
 						});
                         
-                        container.addView(btn);
+                        
             			
-            			return super.onCreateView(inflater, container, savedInstanceState);
+            			return fragView;
             		}
             	};
             	
             	
+            	
             	FragmentTransaction ft = fm.beginTransaction();
-                ft.add(rootElement.getId(),frag);
+                ft.replace(android.R.id.content,frag);
                 //ft.addToBackStack(null);
-                //ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
-                
                 
                 
                 
