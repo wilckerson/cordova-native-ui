@@ -1,0 +1,13 @@
+C:\Projetos\github\cordova-native-ui\platforms\wp7\Bin\Debug\ApplicationIcon.png
+C:\Projetos\github\cordova-native-ui\platforms\wp7\Bin\Debug\Background.png
+C:\Projetos\github\cordova-native-ui\platforms\wp7\Bin\Debug\io.cordova.hellocordova.dll
+C:\Projetos\github\cordova-native-ui\platforms\wp7\Bin\Debug\io.cordova.hellocordova.pdb
+C:\Projetos\github\cordova-native-ui\platforms\wp7\Bin\Debug\AppManifest.xaml
+C:\Projetos\github\cordova-native-ui\platforms\wp7\Bin\Debug\io.cordova.hellocordova.xap
+C:\Projetos\github\cordova-native-ui\platforms\wp7\obj\Debug\App.g.i.cs
+C:\Projetos\github\cordova-native-ui\platforms\wp7\obj\Debug\MainPage.g.i.cs
+C:\Projetos\github\cordova-native-ui\platforms\wp7\obj\Debug\cordovalib\CordovaView.g.i.cs
+C:\Projetos\github\cordova-native-ui\platforms\wp7\obj\Debug\io.cordova.hellocordova.g.resources
+C:\Projetos\github\cordova-native-ui\platforms\wp7\obj\Debug\io.cordova.hellocordova.dll
+C:\Projetos\github\cordova-native-ui\platforms\wp7\obj\Debug\io.cordova.hellocordova.pdb
+C:\Projetos\github\cordova-native-ui\platforms\wp7\obj\Debug\XapCacheFile.xml

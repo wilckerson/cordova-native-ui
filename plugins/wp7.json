@@ -1,0 +1,15 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "com.wilckerson.native_ui": {
+            "PACKAGE_NAME": "{3FC238CF-B39B-48DF-BE98-5F8FD4233C81}"
+        }
+    },
+    "dependent_plugins": {}
+}
