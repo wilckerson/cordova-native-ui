@@ -37,7 +37,7 @@ var exec = require("cordova/exec");
         //                   
         //                    //var id = UUID();
         //                   this.elements[elementId] = {
-        //                        type: "Button",
+        //                        type: "button",
         //                        title: title,
         //                       onClick:onClickCallback
         //                   };
