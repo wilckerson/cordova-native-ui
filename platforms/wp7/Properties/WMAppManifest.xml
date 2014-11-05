@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Deployment AppPlatformVersion="7.1" xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment">
+    <App Author="HelloCordova author" BitsPerPixel="32" Description="Apache Cordova for Windows Phone 7" Genre="apps.normal" ProductID="{3FC238CF-B39B-48DF-BE98-5F8FD4233C81}" Publisher="HelloCordova" RuntimeType="Silverlight" Title="HelloCordova" Version="0.0.1" xmlns="">
+        <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
+        <Capabilities>
+            <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
+            <Capability Name="ID_CAP_NETWORKING" />
+        </Capabilities>
+        <Tasks>
+            <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
+        </Tasks>
+        <Tokens>
+            <PrimaryToken TaskName="_default" TokenID="HelloCordovaToken">
+                <TemplateType5>
+                    <BackgroundImageURI IsRelative="true" IsResource="false">Background.png</BackgroundImageURI>
+                    <Count>0</Count>
+                    <Title>HelloCordova</Title>
+                </TemplateType5>
+            </PrimaryToken>
+        </Tokens>
+    </App>
+</Deployment>
