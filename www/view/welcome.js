@@ -7,10 +7,12 @@ View.welcome = {
     elements: [
         {
             type: NativeUI.type.label,
+            id: "lblUserMsg",
             content: "Bem vindo {0}"
         },
         {
             type: NativeUI.type.image,
+            id: "imgUserPicture",
             path: "img/default_user_picture.png",
             border: {radius: "50%", color: "#fff", size: 3},
             shadow: {x: 1, y: 1, size: 5, blur: 100}

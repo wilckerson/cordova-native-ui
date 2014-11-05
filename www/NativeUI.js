@@ -22,7 +22,9 @@ var NativeUI = {
 }
 
 var NativeUIManager = {
-    navigateToController: function(controller){},
+    navigateToController: function(controller,data){
+        if(controller.onLoad){ controller.onload(data); }
+    },
     updateElementById: function(view,id,propertiesValues){},
     getElementValueById:function(view,id,propertyName){}
 };

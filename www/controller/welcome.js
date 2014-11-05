@@ -4,6 +4,15 @@
 Controller.welcome = {
     view: View.welcome,
 
+    onLoad: function(data){
+
+        var msg = "Bem vindo " + data.name;
+        NativeUIManager.updateElementById(this.view,"lblUserMsg",{content: msg});
+
+        var pictureUrl = data.picUrl;
+        NativeUIManager.updateElementById(this.view,"imgUserPicture",{path: pictureUrl});
+    },
+
     onClickUserTerms: function(){
 
         //Redireciona para a tela de termos de uso
