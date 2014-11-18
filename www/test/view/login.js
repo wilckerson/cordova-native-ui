@@ -2,7 +2,7 @@
  * Created by wilckersonganda on 04/11/14.
  */
 View.login = {
-    type: NativeUI.type.window,
+    type: NativeUI.type.view,
     showHeader: false,
     backgroundImage: "img/bgLogin.png",
     elements: [
@@ -48,7 +48,7 @@ View.login = {
 
 /*
 
- <window backgroundImage=""img/bgLogin.png>
+ <view backgroundImage=""img/bgLogin.png>
  <linearConainer vAlign="bottom" margin="0,0,5%,0">
  <image path="img/logo.png"></image>
  <label content="Seu pet sempre seguro"></label>
@@ -58,13 +58,13 @@ View.login = {
  <step value="1" color="#12df52"></step>
  </button.backgroundGradient>
  <button.content>
- <linearLayout orientation="horizontal">
+ <linearContainer orientation="horizontal">
  <image path="img/facebookIcon.png" margin="0,10,0,0"></image>
  <label content="Entrar com facebook"></label>
- </linearLayout>
+ </linearContainer>
  </button.content>
  </button>
  </linearContainer>
- </window>
+ </view>
 
  */

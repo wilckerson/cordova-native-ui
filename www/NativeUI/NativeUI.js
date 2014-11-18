@@ -3,14 +3,19 @@
  */
 var NativeUI = {
     type: {
-        window: 1,
-        linearContainer: 1,
-        container: 1,
-        label:1,
-        image: 1,
-        button: 1,
-        linkButton: 1
+        view: 'view',
+        linearContainer: 'linearContainer',
+        container: 'container',
+        label:'label',
+        image: 'image',
+        button: 'button',
+        linkButton: 'linkButton',
+        action: 'action',
+        tabView:'tabView',
+        tabViewItem: 'tabViewItem',
+        listView: 'listView'
     },
+    textTransform: {upperCase: 1, lowerCase: 2},
     orientation: {horizontal: 0, vertical: 1},
     gradient: {linear: 0, radial:1},
     vAlign: {top: -1, middle: 0, bottom: 1},
@@ -18,6 +23,13 @@ var NativeUI = {
     color: {
         fromRgba: function (r, g, b, a) {
         }
+    },
+    icons: {
+        edit: "edit",
+        search: "search",
+        person: "person",
+        group:"group",
+        starFull:"star-full"
     }
 }
 

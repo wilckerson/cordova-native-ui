@@ -2,7 +2,7 @@
  * Created by wilckersonganda on 05/11/14.
  */
 View.welcome = {
-    type: NativeUI.type.window,
+    type: NativeUI.type.view,
     showHeader: false,
     elements: [
         {
