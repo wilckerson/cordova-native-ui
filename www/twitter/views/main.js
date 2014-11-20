@@ -3,7 +3,7 @@
  */
 Views.main = {
     type: NativeUI.type.view,
-    title: "Twitter",
+    title: "Twitter2",
     actions: [
         {
             type: NativeUI.type.action,

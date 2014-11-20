@@ -8,6 +8,8 @@
 
     <script src="../nativeUI/NativeUI.js"></script>
     <script src="../nativeUI/NativeUIRender.js"></script>
+    <script src="../nativeUI/NativeUIRenderFries.js"></script>
+    <script src="../nativeUI/NativeUIRenderRatchet.js"></script>
 
     <script src="appTwitter.js"></script>
     <script src="views/main.js"></script>
@@ -17,7 +19,10 @@
 <body>
 
 <script>
-    NativeUIRender.render(Views.main);
+    NativeUIRender.render(Views.main,
+                          //NativeUIRenderFries//Android
+                          NativeUIRenderRatchet//iOs
+                         );
 </script>
 </body>
 </html>

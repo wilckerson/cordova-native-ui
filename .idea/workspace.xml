@@ -1,29 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c03f0eb1-ae6a-4b91-8e43-7b3ef745b860" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/twitter/views/account.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/twitter/appTwitter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/twitter/views/discovery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/twitter/views/home.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/twitter/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/indexCordova.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/twitter/indexFries.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/twitter/indexRatchet.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/twitter/views/main.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/twitter/views/notification.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/NativeUI.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/index.html" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/www/app.js" afterPath="$PROJECT_DIR$/www/test/app.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/www/controller/login.js" afterPath="$PROJECT_DIR$/www/test/controller/login.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/www/controller/welcome.js" afterPath="$PROJECT_DIR$/www/test/controller/welcome.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/www/view/login.js" afterPath="$PROJECT_DIR$/www/test/view/login.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/www/view/playStore.js" afterPath="$PROJECT_DIR$/www/test/view/playStore.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/www/view/shared/loading.js" afterPath="$PROJECT_DIR$/www/test/view/shared/loading.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/www/view/shared/sideMenuLeft.js" afterPath="$PROJECT_DIR$/www/test/view/shared/sideMenuLeft.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/www/view/welcome.js" afterPath="$PROJECT_DIR$/www/test/view/welcome.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="c03f0eb1-ae6a-4b91-8e43-7b3ef745b860" name="Default" comment="" />
     <ignored path="cordovaNativeUI.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
