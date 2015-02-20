@@ -6,6 +6,9 @@
 /Users/wilckersonganda/Documents/Dev/cordova/cordovaNativeUI/platforms/android/ant-build/classes/com/wilckerson/native_ui/NativeUI$2$1$1.class \
 /Users/wilckersonganda/Documents/Dev/cordova/cordovaNativeUI/platforms/android/ant-build/classes/com/wilckerson/native_ui/NativeUI$2$1.class \
 /Users/wilckersonganda/Documents/Dev/cordova/cordovaNativeUI/platforms/android/ant-build/classes/com/wilckerson/native_ui/NativeUI$2.class \
+/Users/wilckersonganda/Documents/Dev/cordova/cordovaNativeUI/platforms/android/ant-build/classes/com/wilckerson/native_ui/NativeUI$3$1$1.class \
+/Users/wilckersonganda/Documents/Dev/cordova/cordovaNativeUI/platforms/android/ant-build/classes/com/wilckerson/native_ui/NativeUI$3$1.class \
+/Users/wilckersonganda/Documents/Dev/cordova/cordovaNativeUI/platforms/android/ant-build/classes/com/wilckerson/native_ui/NativeUI$3.class \
 /Users/wilckersonganda/Documents/Dev/cordova/cordovaNativeUI/platforms/android/ant-build/classes/com/wilckerson/native_ui/NativeUI.class \
 /Users/wilckersonganda/Documents/Dev/cordova/cordovaNativeUI/platforms/android/ant-build/classes/io/cordova/hellocordova/BuildConfig.class \
 /Users/wilckersonganda/Documents/Dev/cordova/cordovaNativeUI/platforms/android/ant-build/classes/io/cordova/hellocordova/HelloCordova.class \

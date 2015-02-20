@@ -27,7 +27,17 @@ var app = {
             NativeUI.loadPage("hue.xml");
             app.loaded = true;
         } else {
-            NativeUI.hide();
+            //NativeUI.hide();
+            NativeUI.getValueAsync("txt", "content", function (value) {
+                app.log("got value");
+
+                NativeUI.setValueAsync("btn", "content", "Hello " + value, function () {
+                    app.log("value updated");
+                });
+
+            });
+
+
             app.loaded = false;
         }
 
