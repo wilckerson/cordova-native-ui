@@ -52,15 +52,36 @@ var exec = require("cordova/exec");
         initView: function () {
 
             exec(function (elementId) {
-                console.log("OK");
+                console.log("NativeUIPluginSucess");
 
 
 
             }, function (err) {
-                console.log("Erro");
-                console.log(err);
+                console.log("NativeUIPluginError: " + err);
             }, "NativeUI", "initView", []);
 
+        },
+        
+        loadPage: function(path){
+             exec(function (elementId) {
+                console.log("NativeUIPluginSucess");
+
+
+
+            }, function (err) {
+                console.log("NativeUIPluginError: " + err);
+            }, "NativeUI", "loadPage", [path]);
+        },
+        
+        hide: function(){
+             exec(function (elementId) {
+                console.log("NativeUIPluginSucess");
+
+
+
+            }, function (err) {
+                console.log("NativeUIPluginError: " + err);
+            }, "NativeUI", "hide", []);
         }
 
     };

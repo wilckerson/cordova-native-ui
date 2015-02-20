@@ -1,0 +1,13 @@
+<page controller="detailsController">
+    <page.header>
+        <container orientation="horizontal">
+            <button icon="icons/close.png" icon-align="left" content="Cancel"></button>
+            <button icon="icons/check.png" icon-align="left" content="Save" onclick="saveItem"></button>
+        </container>
+    </page.header>
+    
+    <page.container orientation="vertical">
+        <textBox placeholder="Description" bind="description"></textBox>
+        <button visible="showDeleteBtn" content="Delete this item" color="red" marginTop="80"></button>
+    </page.container>
+</page>

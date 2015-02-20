@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+    <link type="text/css" rel="stylesheet" href="../nativeUI/fries/themes/holo-dark/holo-dark.min.css"/>
+    <script type="text/javascript" src="../nativeUI/fries/fries.js"></script>
+    <script type="text/javascript" src="../nativeUI/fries/fingerblast.js"></script>
+    <script>
+        window.onload = function(){
+
+           // setTimeout(function(){
+                new FingerBlast('body');
+            //},1618)
+
+        };
+    </script>
+</head>
+<body>
+
+<div class="page">
+    <header class="action-bar fixed-top">
+        <a href="index.html" class="app-icon action" data-transition="pop">
+            <!--<i class="icon-up-button"></i>-->
+            <i class="icon-fries"></i>
+        </a>
+        <h1 class="title">Twitter
+            <!--<span class="subtitle">Fixed Tabs and Lists</span>-->
+        </h1>
+        <ul class="actions pull-right">
+            <li><a href="javascript: void(0);" class="action" title="Edit"><i class="icon-edit"></i></a></li>
+
+            <li><a href="javascript: void(0);" class="action" title="Search"><i class="icon-search"></i></a></li>
+            </ul>
+    </header>
+
+    <nav class="tab-fixed">
+        <ul class="tab-inner">
+            <li class="active"><a href="#people" data-ignore="true"><i class="icon-person"></i></a></li>
+            <li><a href="#groups" data-ignore="true"><i class="icon-group"></i></a></li>
+            <li><a href="#favorites" data-ignore="true"><i class="icon-star-full"></i></a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <div class="slider tab-slider">
+            <ul>
+                <li id="people" class="tab-item active">
+                    <p>Tab 1</p>
+                </li>
+                <li id="groups" class="tab-item">
+                    <!--<ul class="list inset">-->
+                        <!--<li class="list-divider">Groups</li>-->
+                        <!--<li class="list-item-single-line selectable"><a href="javascript: void(0);" data-ignore="true">Acquaintances</a></li>-->
+                        <!--<li class="list-item-single-line selectable"><a href="javascript: void(0);" data-ignore="true">Family</a></li>-->
+                        <!--<li class="list-item-single-line selectable"><a href="javascript: void(0);" data-ignore="true">Friends</a></li>-->
+                        <!--<li class="list-item-single-line selectable"><a href="javascript: void(0);" data-ignore="true">Work</a></li>-->
+                    <!--</ul>-->
+                    <p>Tab 2</p>
+                </li>
+                <li id="favorites" class="tab-item">
+                   Tab3
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+</div>
+
+</body>
+</html>

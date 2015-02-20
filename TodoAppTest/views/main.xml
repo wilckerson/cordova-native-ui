@@ -1,0 +1,25 @@
+<page controller="mainController">
+    <page.header android-align="left" ios-align="center">
+        <text content="TodoApp"></text>
+    </page.header>
+    <page.actions android-align="left">
+        <button icon="icon/plus.png" content="" onclick="newItem()"></button>
+    </page.actions>
+
+    <page.container orientation="vertical">
+        <listView>
+            <listView.emptyTemplate>
+                <text align="center" content="No items yet."></text>
+            </listView.emptyTemplate>
+            <listView.itemTemplate bind="item from items">
+                <container orientation="vertical">
+                    <container orientation="horizontal">
+                        <checkBox width="content" bind="item.done"></checkBox>
+                        <text margin-left="10" width="remainig" overflow="wrap" bind="item.description"></text>
+                    </container>
+                    <rectangle stroke="2" height="1" width="100%" color="#808080"></rectangle>
+                </container>
+            </listView.itemTemplate>
+        </listView>
+    </page.container>
+</page>

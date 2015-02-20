@@ -1,0 +1,88 @@
+Content
+Linear
+Absolute
+
+wpMenu
+Image
+Text
+Button
+Scroll
+
+XML (Android: XmlResourceParser)
+<page mode="portrait" orientation="vertical">
+    <linear-container>
+        <image align="center" src="cifraClubLogo.png"></image>
+        <button align="right" margin-right="5" src="icoInfo.png" ios-visible="true"></button>
+        
+    </container>
+    <image align="center" src="gradient.png" ios-visible="true"></image>
+</page>
+
+JsonML
+["page",{ id: "page1", mode: "portrait", orientation: "vertical"},
+    ["linear_container", 
+        ["image",{align: "center", src: "cifraClucLogo.png"}], 
+        ["button",{ align:"right", margin_left:"5", src="icoInfo.png", ios_visible: true}]
+    ],
+    ["image", {align:"center"}] 
+]
+
+NativeUI.loadContent(ïndex.xml");
+var id = "txtNome";
+var arr = NativeUI.getControlValue([{"name","text"},{"lastName","text"}]);
+
+
+if(!arr[0]|| !arr[1])
+{
+    NativeUI.updateControlValue(id,"show",true)
+}
+
+});
+
+
+
+var $body = $(".classHue");
+$body.append("hue")
+$body.append("hue2")
+
+JSON
+{
+    type: "page",
+    orientation: "portrait",
+    elements:[
+        {
+            type: "absolute"
+            elements:[
+                {
+                    type: "image",  align: "center",  src: "cifraClubLogo.png"
+                },
+                {
+                    type: "button",  
+                    align: "right",   margin-right: 5, scr: "icoInfo.png", ios-visible: true
+                }
+            ]
+        },
+        {
+            type: "image",
+            align: "center",
+            src: "gradient.png",
+            ios-visible=true
+        },
+        {
+            type: "text",
+            size: 50,
+            color: orange
+        },
+        {
+            type: "text",
+            size: 10,
+            color: gray
+        }
+        
+        
+    ]
+}
+
+
+
+
