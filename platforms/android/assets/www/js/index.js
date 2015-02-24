@@ -25,17 +25,22 @@ var app = {
         app.log("click");
         if (!app.loaded) {
             NativeUI.loadPage("hue.xml");
+            
+            NativeUI.addListener("btn","click",function(){
+                app.log("btn clicked");
+            });
+            
             app.loaded = true;
         } else {
             //NativeUI.hide();
-            NativeUI.getValueAsync("txt", "content", function (value) {
-                app.log("got value");
+            //NativeUI.getValueAsync("txt", "content", function (value) {
+                //app.log("got value");
+                //"Hello " + value
+                //NativeUI.setValueAsync("btn", "content", (new Date()).getTime() , function () {
+                   // app.log("value updated");
+                //});
 
-                NativeUI.setValueAsync("btn", "content", "Hello " + value, function () {
-                    app.log("value updated");
-                });
-
-            });
+            //});
 
 
             app.loaded = false;

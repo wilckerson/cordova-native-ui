@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
+import org.apache.cordova.PluginResult;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,6 +43,10 @@ public class NativeUI extends CordovaPlugin {
 	ArrayList<NativePage> pages;
 	NativePage currentPage;
 
+	CallbackContext eventsCallbackContext;
+
+	OnClickListener eventsOnClickListener;
+
 	// HashMap<String,Integer> idControls;
 
 	@Override
@@ -56,6 +61,7 @@ public class NativeUI extends CordovaPlugin {
 
 		// Initializing the list of controls ID
 		// idControls = new HashMap<String,Integer>();
+		initializeEventListeners();
 
 	};
 
@@ -75,27 +81,68 @@ public class NativeUI extends CordovaPlugin {
 			return true;
 
 		} else if (action.equals("setValueAsync")) {
-			String controlID = args.getString(0);
+			String controlName = args.getString(0);
 			String propertyName = args.getString(1);
 			String propertyValue = args.getString(2);
-			this.setValueAsync(controlID, propertyName, propertyValue, callbackContext);
+			this.setValueAsync(controlName, propertyName, propertyValue, callbackContext);
 			return true;
 
 		} else if (action.equals("getValueAsync")) {
-			String controlID = args.getString(0);
+			String controlName = args.getString(0);
 			String propertyName = args.getString(1);
-			this.getValueAsync(controlID, propertyName, callbackContext);
+			this.getValueAsync(controlName, propertyName, callbackContext);
+			return true;
+		} else if (action.equals("broadcastEvent")) {
+
+			eventsCallbackContext = callbackContext;
 			return true;
 		}
 		return false;
 	}
 
-	private void setValueAsync(String controlID, final String propertyName, final String propertyValue, CallbackContext callbackContext) {
+	public void initializeEventListeners() {
+		eventsOnClickListener = new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+
+				String controlName = arg0.getTag().toString();
+				String eventName = "click";
+
+				broadcastEvent(controlName, eventName);
+
+			}
+		};
+
+	}
+
+	private void broadcastEvent(String controlName, String eventName) {
+
+		try {
+			if (eventsCallbackContext != null) {
+
+				JSONObject json = new JSONObject();
+				json.put("controlName", controlName);
+				json.put("eventName", eventName);
+
+				PluginResult dataResult = new PluginResult(PluginResult.Status.OK, json);
+				dataResult.setKeepCallback(true);
+				eventsCallbackContext.sendPluginResult(dataResult);
+			}
+		} catch (Exception e) {
+			// TODO: What is the best way to catch this code?
+		}
+
+	}
+
+	private void setValueAsync(String controlName, final String propertyName, final String propertyValue, CallbackContext callbackContext) {
 		try {
 
 			if (currentPage != null) {
 
-				final View view = currentPage.fragment.getView().findViewById(stringToInteger(controlID));
+				// final View view =
+				// currentPage.fragment.getView().findViewById(stringToInteger(controlID));
+				final View view = currentPage.fragment.getView().findViewWithTag(controlName);
 
 				cordova.getActivity().runOnUiThread(new Runnable() {
 					public void run() {
@@ -118,20 +165,22 @@ public class NativeUI extends CordovaPlugin {
 			callbackContext.success();
 
 		} catch (Exception ex) {
-			String msg = String.format("Error on setValueAsync to property: %s ,with value: %s. JavaException: %s", propertyName, propertyValue, ex.getMessage());
+			String msg = String.format("Error on setValueAsync to control: %s with property: %s and value: %s. JavaException: %s", controlName, propertyName, propertyValue, ex.getMessage());
 
 			callbackContext.error(msg);
 		}
 	}
 
-	private void getValueAsync(String controlID, final String propertyName, CallbackContext callbackContext) {
+	private void getValueAsync(String controlName, final String propertyName, CallbackContext callbackContext) {
 		try {
 
 			String value = null;
 
 			if (currentPage != null) {
 
-				final View view = currentPage.fragment.getView().findViewById(stringToInteger(controlID));
+				// final View view =
+				// currentPage.fragment.getView().findViewById(stringToInteger(controlID));
+				final View view = currentPage.fragment.getView().findViewWithTag(controlName);
 
 				// cordova.getActivity().runOnUiThread(new Runnable() {
 				// public void run() {
@@ -154,7 +203,7 @@ public class NativeUI extends CordovaPlugin {
 			callbackContext.success(value);
 
 		} catch (Exception ex) {
-			String msg = String.format("Error on getValueAsync to property: %s. JavaException: %s", propertyName, ex.getMessage());
+			String msg = String.format("Error on getValueAsync on property: %s of control: %s . JavaException: %s", propertyName, controlName, ex.getMessage());
 
 			callbackContext.error(msg);
 		}
@@ -232,28 +281,32 @@ public class NativeUI extends CordovaPlugin {
 
 				LinearLayout layout = new LinearLayout(activity);
 
-				EditText txt = new EditText(container.getContext());
+				// EditText txt = new EditText(container.getContext());
 				// txt.setTag("txt");
-				txt.setHint("Native textBox");
-				txt.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-				layout.addView(txt);
-				txt.setId(stringToInteger("txt"));
-
+				// //txt.setId(stringToInteger("txt"));
+				// txt.setHint("Native textBox");
+				// txt.setLayoutParams(new
+				// LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+				// ViewGroup.LayoutParams.WRAP_CONTENT));
+				// layout.addView(txt);
 				Button btn = new Button(container.getContext());
-				// btn.setTag("btn");
-				btn.setId(stringToInteger("btn"));
-				btn.setText("Navigate");
+				btn.setTag("btn");
+				// btn.setId(stringToInteger("btn"));
+				btn.setText("NativeBtn");
 				btn.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 				layout.addView(btn);
+				
+				btn.setOnClickListener(eventsOnClickListener);
 
-				btn.setOnClickListener(new OnClickListener() {
 
-					@Override
-					public void onClick(View arg0) {
+				Button btn2 = new Button(container.getContext());
+				btn2.setTag("btn2");
+				// btn.setId(stringToInteger("btn"));
+				btn2.setText("NativeBtn2");
+				btn2.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+				layout.addView(btn2);
 
-						loadPage("blabla", new CallbackContext(null, null));
-					}
-				});
+				btn2.setOnClickListener(eventsOnClickListener);
 
 				return layout;
 			}

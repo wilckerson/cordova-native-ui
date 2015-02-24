@@ -1,6 +1,13 @@
 cordova.define("com.wilckerson.native_ui.NativeUI", function(require, exports, module) { var exec = require("cordova/exec");
+var chanel = require('cordova/channel');
 
+
+
+                                
 var NativeUI = {
+    
+    controlEvents: {},
+    
     init: function () {
 
     },
@@ -72,7 +79,7 @@ var NativeUI = {
         }, "NativeUI", "hide", []);
     },
 
-    setValueAsync: function (controlID, propertyName, propertyValue, onSucess, onError) {
+    setValueAsync: function (controlName, propertyName, propertyValue, onSucess, onError) {
         exec(function (result) {
             console.log("NativeUIPluginSucess: " + result);
 
@@ -85,10 +92,10 @@ var NativeUI = {
             if (onError) {
                 onError(err);
             }
-        }, "NativeUI", "setValueAsync", [controlID, propertyName, propertyValue]);
+        }, "NativeUI", "setValueAsync", [controlName, propertyName, propertyValue]);
     },
 
-    getValueAsync: function (controlID, propertyName, onSucess, onError) {
+    getValueAsync: function (controlName, propertyName, onSucess, onError) {
         exec(function (result) {
             console.log("NativeUIPluginSucess: " + result);
 
@@ -101,16 +108,83 @@ var NativeUI = {
             if (onError) {
                 onError(err);
             }
-        }, "NativeUI", "getValueAsync", [controlID, propertyName]);
+        }, "NativeUI", "getValueAsync", [controlName, propertyName]);
     },
 
-    addListener: function (controlID, eventName, handlerCallback) {},
+    addListener: function (controlName, eventName, handlerCallback) {
+    
+        //If the control was not registered
+        if(!NativeUI.controlEvents[controlName]){
+               NativeUI.controlEvents[controlName] = {};
+        }
+        
+        //If the control event was not registred
+         if(!NativeUI.controlEvents[controlName][eventName]){
+               NativeUI.controlEvents[controlName][eventName] = [];
+        }
+        
+        //Register the callback on control event
+        NativeUI.controlEvents[controlName][eventName].push(handlerCallback);
+        
+         exec(function (result) {
+            console.log("NativeUIPluginSucess: " + result)
 
-    removeListener: function (controlID, eventName, handlerCallback) {},
+        }, function (err) {
+            console.log("NativeUIPluginError: " + err);
+           
+        }, "NativeUI", "addListener", [controlName, eventName]);
+        
+    },
+
+    removeListener: function (controlName, eventName, handlerCallback) {},
+    
+    broadcastEvent: function(controlName,eventName){
+         console.log("NativeUI broadcastEvent "+eventName+" on control " + controlName);
+        
+        //If has any handlerCallback registred for this control and event
+        if(NativeUI.controlEvents[controlName] && NativeUI.controlEvents[controlName][eventName])
+        {
+            //Call all of them
+            var callbacks = NativeUI.controlEvents[controlName][eventName];
+            for(var i = 0; i < callbacks.length; i++){
+                var func = callbacks[i];
+                if(func){
+                    func();  
+                    
+                }
+            }
+            console.log("NativeUI broadcasted event");
+        }
+        else
+        {
+            console.log("NativeUI there is no handlerCallbacks for event "+eventName+" on control " + controlName);
+         
+        }
+        
+    },
+    
+    registerBroadcastEvent: function(){
+        
+         exec(function (result) {
+            console.log("NativeUIPluginSucess: " + result)
+
+            if(result){
+                NativeUI.broadcastEvent(result.controlName,result.eventName);
+            }
+            
+        }, function (err) {
+            console.log("NativeUIPluginError: " + err);
+           
+        }, "NativeUI", "broadcastEvent", []);
+    }
 
 };
 
 //document.addEventListener("NativeEvent" ,NativeUI.nativeEvent, false );
+
+chanel.onCordovaReady.subscribe(function() {
+    NativeUI.registerBroadcastEvent();
+});
 
 module.exports = NativeUI;
 });
