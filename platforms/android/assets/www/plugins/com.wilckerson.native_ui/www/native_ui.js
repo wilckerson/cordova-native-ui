@@ -126,17 +126,26 @@ var NativeUI = {
         //Register the callback on control event
         NativeUI.controlEvents[controlName][eventName].push(handlerCallback);
         
-         exec(function (result) {
-            console.log("NativeUIPluginSucess: " + result)
-
-        }, function (err) {
-            console.log("NativeUIPluginError: " + err);
-           
-        }, "NativeUI", "addListener", [controlName, eventName]);
         
     },
 
-    removeListener: function (controlName, eventName, handlerCallback) {},
+    removeListener: function (controlName, eventName, handlerCallback) {
+    
+         //If has any handlerCallback registred for this control and event
+        if(NativeUI.controlEvents[controlName] && NativeUI.controlEvents[controlName][eventName])
+        {
+            //Call all of them
+            var callbacks = NativeUI.controlEvents[controlName][eventName];
+            for(var i = 0; i < callbacks.length; i++){
+                var func = callbacks[i];
+                if(func == handlerCallback){
+                     callbacks.splice(i, 1); 
+                    i--;
+                    
+                }
+            } 
+        }
+    },
     
     broadcastEvent: function(controlName,eventName){
          console.log("NativeUI broadcastEvent "+eventName+" on control " + controlName);
