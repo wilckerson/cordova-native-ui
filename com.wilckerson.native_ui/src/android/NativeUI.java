@@ -268,23 +268,25 @@ public class NativeUI extends CordovaPlugin {
 		return (new java.math.BigInteger(str.getBytes())).intValue();
 	}
 
-	private View parseXML(Document xml, Context context) {
+	public static View parseXML(NodeList childNodes, Context context) {
 
 		LinearLayout layout = new LinearLayout(context);
 
-		NodeList childNodes = xml.getChildNodes();
 
 		for (int i = 0; i < childNodes.getLength(); i++) {
 
-			Element xmlElement = (Element) childNodes.item(i);
+			Node node = childNodes.item(i);
 
-			if (xmlElement.getNodeType() == Node.ELEMENT_NODE) {
+			if (node.getNodeType() == Node.ELEMENT_NODE) {
 
+				Element xmlElement = (Element)node;
 				String nodeName = xmlElement.getNodeName();
 
 				NativeUIControl control = NativeUIMapper.getControlFor(nodeName);
-				View nativeView = control.getNativeView(xmlElement, context);
-				layout.addView(nativeView);
+				if(control != null){
+					View nativeView = control.getNativeView(xmlElement, context);
+					layout.addView(nativeView);
+				}
 			}
 		}
 
@@ -298,7 +300,7 @@ public class NativeUI extends CordovaPlugin {
 			@Override
 			public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-				return parseXML(xmlParser, container.getContext());
+				return parseXML(xmlParser.getChildNodes(), container.getContext());
 
 				// LinearLayout layout = new LinearLayout(activity);
 

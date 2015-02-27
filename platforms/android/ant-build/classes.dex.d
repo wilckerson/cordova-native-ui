@@ -17,6 +17,7 @@
 /Users/wilckersonganda/Documents/Dev/cordova/cordovaNativeUI/platforms/android/ant-build/classes/com/wilckerson/native_ui/NativeUIControl.class \
 /Users/wilckersonganda/Documents/Dev/cordova/cordovaNativeUI/platforms/android/ant-build/classes/com/wilckerson/native_ui/NativeUIControlsMap.class \
 /Users/wilckersonganda/Documents/Dev/cordova/cordovaNativeUI/platforms/android/ant-build/classes/com/wilckerson/native_ui/NativeUIMapper.class \
+/Users/wilckersonganda/Documents/Dev/cordova/cordovaNativeUI/platforms/android/ant-build/classes/com/wilckerson/native_ui/NativeUIPage.class \
 /Users/wilckersonganda/Documents/Dev/cordova/cordovaNativeUI/platforms/android/ant-build/classes/com/wilckerson/native_ui/NativeUITextBox.class \
 /Users/wilckersonganda/Documents/Dev/cordova/cordovaNativeUI/platforms/android/ant-build/classes/io/cordova/hellocordova/BuildConfig.class \
 /Users/wilckersonganda/Documents/Dev/cordova/cordovaNativeUI/platforms/android/ant-build/classes/io/cordova/hellocordova/HelloCordova.class \
