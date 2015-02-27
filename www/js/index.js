@@ -24,7 +24,7 @@ var app = {
 
         app.log("click");
         if (!app.loaded) {
-            NativeUI.loadPage("hue.xml");
+            NativeUI.loadPage("test.xml");
             
             NativeUI.addListener("btn","click",function(){
                 app.log("btn clicked");

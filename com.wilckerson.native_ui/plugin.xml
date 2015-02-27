@@ -54,5 +54,7 @@
         </config-file>
         
         <source-file src="src/android/NativeUI.java" target-dir="src/com/wilckerson/native_ui" />
+        <source-file src="src/android/NativeUIMapper.java" target-dir="src/com/wilckerson/native_ui" />
+        <source-file src="src/android/NativeUIButton.java" target-dir="src/com/wilckerson/native_ui" />
     </platform>
 </plugin>

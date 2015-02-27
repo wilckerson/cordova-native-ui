@@ -1,7 +1,12 @@
 package com.wilckerson.native_ui;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -10,6 +15,11 @@ import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xmlpull.v1.XmlPullParserException;
 
 import android.R;
 import android.annotation.SuppressLint;
@@ -19,6 +29,8 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 //import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
+import android.content.res.XmlResourceParser;
 //import android.app.FragmentManager.OnBackStackChangedListener;
 //import android.app.FragmentTransaction;
 
@@ -43,9 +55,7 @@ public class NativeUI extends CordovaPlugin {
 	ArrayList<NativePage> pages;
 	NativePage currentPage;
 
-	CallbackContext eventsCallbackContext;
-
-	OnClickListener eventsOnClickListener;
+	static CallbackContext eventsCallbackContext;
 
 	// HashMap<String,Integer> idControls;
 
@@ -58,10 +68,6 @@ public class NativeUI extends CordovaPlugin {
 
 		// Initializing the list of pages
 		pages = new ArrayList<NativePage>();
-
-		// Initializing the list of controls ID
-		// idControls = new HashMap<String,Integer>();
-		initializeEventListeners();
 
 	};
 
@@ -100,23 +106,7 @@ public class NativeUI extends CordovaPlugin {
 		return false;
 	}
 
-	public void initializeEventListeners() {
-		eventsOnClickListener = new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-
-				String controlName = arg0.getTag().toString();
-				String eventName = "click";
-
-				broadcastEvent(controlName, eventName);
-
-			}
-		};
-
-	}
-
-	private void broadcastEvent(String controlName, String eventName) {
+	public static void broadcastEvent(String controlName, String eventName) {
 
 		try {
 			if (eventsCallbackContext != null) {
@@ -248,8 +238,13 @@ public class NativeUI extends CordovaPlugin {
 			if (page == null) { // If doesnt exist
 
 				// Load the XML file
+				InputStream stream = cordova.getActivity().getAssets().open("www/nativeui/" + path);
+
+				DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+				Document xmlParser = builder.parse(stream);
+
 				// Parse the XML to generate native controls inside Fragment
-				Fragment frag = renderFragment();
+				Fragment frag = renderFragment(xmlParser);
 
 				// Create the page with generated fragment
 				page = new NativePage();
@@ -273,13 +268,41 @@ public class NativeUI extends CordovaPlugin {
 		return (new java.math.BigInteger(str.getBytes())).intValue();
 	}
 
-	private Fragment renderFragment() {
+	public static View parseXML(NodeList childNodes, Context context) {
+
+		LinearLayout layout = new LinearLayout(context);
+
+
+		for (int i = 0; i < childNodes.getLength(); i++) {
+
+			Node node = childNodes.item(i);
+
+			if (node.getNodeType() == Node.ELEMENT_NODE) {
+
+				Element xmlElement = (Element)node;
+				String nodeName = xmlElement.getNodeName();
+
+				NativeUIControl control = NativeUIMapper.getControlFor(nodeName);
+				if(control != null){
+					View nativeView = control.getNativeView(xmlElement, context);
+					layout.addView(nativeView);
+				}
+			}
+		}
+
+		return layout;
+
+	}
+
+	private Fragment renderFragment(final Document xmlParser) {
 
 		Fragment frag = new Fragment() {
 			@Override
 			public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-				LinearLayout layout = new LinearLayout(activity);
+				return parseXML(xmlParser.getChildNodes(), container.getContext());
+
+				// LinearLayout layout = new LinearLayout(activity);
 
 				// EditText txt = new EditText(container.getContext());
 				// txt.setTag("txt");
@@ -289,26 +312,19 @@ public class NativeUI extends CordovaPlugin {
 				// LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
 				// ViewGroup.LayoutParams.WRAP_CONTENT));
 				// layout.addView(txt);
-				Button btn = new Button(container.getContext());
-				btn.setTag("btn");
-				// btn.setId(stringToInteger("btn"));
-				btn.setText("NativeBtn");
-				btn.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-				layout.addView(btn);
-				
-				btn.setOnClickListener(eventsOnClickListener);
 
+				// Button btn2 = new Button(container.getContext());
+				// btn2.setTag("btn2");,
+				// // btn.setId(stringToInteger("btn"));
+				// btn2.setText("NativeBtn2");
+				// btn2.setLayoutParams(new
+				// LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+				// ViewGroup.LayoutParams.WRAP_CONTENT));
+				// layout.addView(btn2);
+				//
+				// btn2.setOnClickListener(eventsOnClickListener);
 
-				Button btn2 = new Button(container.getContext());
-				btn2.setTag("btn2");
-				// btn.setId(stringToInteger("btn"));
-				btn2.setText("NativeBtn2");
-				btn2.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-				layout.addView(btn2);
-
-				btn2.setOnClickListener(eventsOnClickListener);
-
-				return layout;
+				// return layout;
 			}
 		};
 
@@ -450,4 +466,9 @@ class NativePage {
 
 	Fragment fragment;
 	String path;
+}
+
+interface NativeUIControl {
+
+	View getNativeView(Element xmlElement, Context context);
 }

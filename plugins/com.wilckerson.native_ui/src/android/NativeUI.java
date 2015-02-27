@@ -19,6 +19,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 //import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 //import android.app.FragmentManager.OnBackStackChangedListener;
 //import android.app.FragmentTransaction;
 
@@ -43,9 +44,8 @@ public class NativeUI extends CordovaPlugin {
 	ArrayList<NativePage> pages;
 	NativePage currentPage;
 
-	CallbackContext eventsCallbackContext;
+	static CallbackContext eventsCallbackContext;
 
-	OnClickListener eventsOnClickListener;
 
 	// HashMap<String,Integer> idControls;
 
@@ -58,10 +58,6 @@ public class NativeUI extends CordovaPlugin {
 
 		// Initializing the list of pages
 		pages = new ArrayList<NativePage>();
-
-		// Initializing the list of controls ID
-		// idControls = new HashMap<String,Integer>();
-		initializeEventListeners();
 
 	};
 
@@ -100,23 +96,8 @@ public class NativeUI extends CordovaPlugin {
 		return false;
 	}
 
-	public void initializeEventListeners() {
-		eventsOnClickListener = new OnClickListener() {
 
-			@Override
-			public void onClick(View arg0) {
-
-				String controlName = arg0.getTag().toString();
-				String eventName = "click";
-
-				broadcastEvent(controlName, eventName);
-
-			}
-		};
-
-	}
-
-	private void broadcastEvent(String controlName, String eventName) {
+	public static void broadcastEvent(String controlName, String eventName) {
 
 		try {
 			if (eventsCallbackContext != null) {
@@ -289,24 +270,18 @@ public class NativeUI extends CordovaPlugin {
 				// LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
 				// ViewGroup.LayoutParams.WRAP_CONTENT));
 				// layout.addView(txt);
-				Button btn = new Button(container.getContext());
-				btn.setTag("btn");
-				// btn.setId(stringToInteger("btn"));
-				btn.setText("NativeBtn");
-				btn.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-				layout.addView(btn);
+				NativeUIControl control = NativeUIControlsMap.getControlFor("button");
+				View nativeView = control.getNativeView("",container.getContext());
+				layout.addView(nativeView);
 				
-				btn.setOnClickListener(eventsOnClickListener);
-
-
-				Button btn2 = new Button(container.getContext());
-				btn2.setTag("btn2");
-				// btn.setId(stringToInteger("btn"));
-				btn2.setText("NativeBtn2");
-				btn2.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-				layout.addView(btn2);
-
-				btn2.setOnClickListener(eventsOnClickListener);
+//				Button btn2 = new Button(container.getContext());
+//				btn2.setTag("btn2");
+//				// btn.setId(stringToInteger("btn"));
+//				btn2.setText("NativeBtn2");
+//				btn2.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//				layout.addView(btn2);
+//
+//				btn2.setOnClickListener(eventsOnClickListener);
 
 				return layout;
 			}
@@ -450,4 +425,70 @@ class NativePage {
 
 	Fragment fragment;
 	String path;
+}
+
+class NativeUIControlsMap{
+	
+	public static NativeUIControl getControlFor(String xmlNodeName){
+		
+		NativeUIControl control = null;
+		
+		if(xmlNodeName == "button"){
+			
+			 control = new NativeUIButton();
+		}
+		else if(xmlNodeName == "textbox"){
+			
+			 control = new NativeUITextBox();
+		}
+		
+		return control;
+	}
+	
+}
+
+interface NativeUIControl{
+	
+	View getNativeView(String xmlNodeInfo,Context context);
+}
+
+class NativeUIButton implements NativeUIControl, OnClickListener{
+
+	@Override
+	public View getNativeView(String xmlNodeInfo,Context context) {
+		
+		Button btn = new Button(context);
+		btn.setTag("btn");
+		// btn.setId(stringToInteger("btn"));
+		btn.setText("NativeBtn");
+		btn.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		btn.setOnClickListener(this);
+		
+		return btn;
+		
+	}
+
+	@Override
+	public void onClick(View arg0) {
+		
+		String controlName = arg0.getTag().toString();
+		String eventName = "click";
+
+		NativeUI.broadcastEvent(controlName, eventName);
+		
+	}
+
+}
+
+class NativeUITextBox implements NativeUIControl{
+
+	@Override
+	public View getNativeView(String xmlNodeInfo,Context context) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
+
 }

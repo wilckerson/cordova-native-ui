@@ -1,0 +1,6 @@
+<page>
+
+    <button name="btn" content="Native Button XML"/>
+    <button name="btn" content="Native Button XML with same name"/>
+    <button name="btn2" content="Native Button2 from XML"/>
+</page>
