@@ -11,34 +11,34 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 
-class NativeUIButton implements NativeUIControl, OnClickListener{
+class NativeUIButton extends NativeUIControl implements OnClickListener {
 
 	@Override
-	public View getNativeView(Element xmlElement,Context context) {
-		
+	public View getNativeView(Element xmlElement, Context context) {
+
 		Button btn = new Button(context);
 		
-		String name = xmlElement.getAttribute("name");
-		btn.setTag(name);
-		
+		super.parseCommonAttributes(btn, xmlElement);
+
 		String content = xmlElement.getAttribute("content");
-		btn.setText(content);
-		
+		if (content != null && !content.isEmpty()) {
+			btn.setText(content);
+		}
+
 		btn.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		btn.setOnClickListener(this);
-		
+
 		return btn;
-		
+
 	}
 
 	@Override
 	public void onClick(View arg0) {
-		
-		String controlName = arg0.getTag().toString();
+
 		String eventName = "click";
 
-		NativeUI.broadcastEvent(controlName, eventName);
-		
+		NativeUI.broadcastEvent(super.controlId, eventName);
+
 	}
 
 }

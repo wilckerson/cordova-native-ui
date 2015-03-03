@@ -16,7 +16,7 @@ var app = {
         var btnPlugin = document.getElementById("btnPlugin");
         btnPlugin.addEventListener("click", app.onClickBtnPlugin, false);
 
-
+       
     },
 
     loaded: false,
@@ -24,14 +24,18 @@ var app = {
 
         app.log("click");
         if (!app.loaded) {
-            NativeUI.loadPage("test.xml");
+
+            WelcomeDemo.init();
+
+            //NativeUI.loadPage("test.xml");
             
-            NativeUI.addListener("btn","click",function(){
-                app.log("btn clicked");
-            });
+            // NativeUI.addListener("btn","click",function(){
+            //     app.log("btn clicked");
+            // });
             
             app.loaded = true;
-        } else {
+        } 
+        //else {
             //NativeUI.hide();
             //NativeUI.getValueAsync("txt", "content", function (value) {
                 //app.log("got value");
@@ -43,8 +47,8 @@ var app = {
             //});
 
 
-            app.loaded = false;
-        }
+            //app.loaded = false;
+       // }
 
     },
     // Update DOM on a Received Event

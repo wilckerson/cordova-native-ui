@@ -8,6 +8,8 @@ public class NativeUIMapper{
 		
 		if(xmlNodeName.equals("page")){ control = new NativeUIPage(); }
 		else if(xmlNodeName.equals("button")){ control = new NativeUIButton(); }
+		else if(xmlNodeName.equals("text")){ control = new NativeUIText(); }
+		else if(xmlNodeName.equals("textbox")){ control = new NativeUITextBox(); }
 
 //		else if(xmlNodeName == "yourcontrol"){
 //			

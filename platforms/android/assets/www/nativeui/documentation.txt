@@ -1,0 +1,49 @@
+======================
+Documentation
+======================
+
+Platform prefixes: ios, android, wp, win
+
+Device sizes prefixes: xs, sm, md, lg, xlg
+
+Device orientagion prefixes: land, port
+
+Size properties:
+width, height, outerWidth, outerHeight (default: content)
+
+Size properties can be filled with:
+- Fixed value (Ex: 200)
+- Content size (content) 
+- Porcentage value (Ex: 50%)
+- Remaining space (auto)
+
+Style properties:
+background-color: color name, rgba(r,g,b,a), #hex, #alphaHex
+padding: top, right, bottom, left || top_bottom, left_right
+visible: true, false (default: true)
+
+======================
+Controls
+======================
+
+page
+    title: page title
+    page.actions
+        action-align: left, center, right (default: center)
+        action-valign: top, middle, bottom (default: middle)
+    page.content
+
+container
+    mode: vertical, horizontal, absolute (default: vertical)
+    overflow: wrap, hidden, scroll (default: hidden)
+text
+    content: text
+
+button
+    content: main text
+    icon-src: image icon path
+    icon-align: left, center, right (default: left)
+
+image
+    src: image path
+   

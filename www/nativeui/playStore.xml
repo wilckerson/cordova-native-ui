@@ -1,0 +1,42 @@
+<style query="#categories button">
+    <xs-outerWidth>50%</xs-outerWidth>
+    <md-outerWidth>33%</md-outerWidth>
+    <margin>5</margin>
+</style>
+
+<style query="#newUpdated container">
+    <outerWidth>auto</outerWidth>
+    <margin>5</margin>
+</style>
+
+<page title="Play Store">
+    <page.actions background-color="#eb45eb">
+        <button name="menu" content="" icon-src="menu.png" action-align="left"></button>
+        <button name="search" content="" icon-src="search.png" action-align="right"></button>
+    </page.actions>
+
+    <page.container padding="0,30">
+
+        <container id="categories" mode="horizontal" overflow="wrap">
+
+            <button id="btnApps" icon-src="icoDroid.png" content="APPS" background-color="green"></button>
+            <button id="btnGames" icon-src="icoJoystick.png" content="JOGOS" background-color="green" xs-width="50%" md-widht="33%"></button>
+            <button id="btnMovies" icon-src="icoMovie.png" content="FILMES" background-color="red" xs-width="50%" md-widht="33%"></button>
+            <button id="btnMusics" icon-src="icoHeadphone.png" content="MUSICAS" background-color="orange" xs-width="50%" md-widht="33%"></button>
+            <button id="btnBooks" icon-src="icoBook.png" content="JOGOS" background-color="light-blue" xs-width="50%" md-widht="33%"></button>
+            <button id="btnNews" icon-src="icoNews.png" content="BANCA" background-color="indigo" xs-width="50%" md-widht="33%"></button>
+
+        </container>
+        
+        <container id="newsUpdated" mode="horizontal" overflow="wrap">
+            <container></container>
+            <container></container>
+            <container ></container>
+            <container md-visible="true"></container>
+            <container lg-visible="true"></container>
+        </container>
+
+    </page.container>
+    <textbox>
+    </textBox>
+</page>

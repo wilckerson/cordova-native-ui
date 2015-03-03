@@ -55,6 +55,7 @@ public class NativeUI extends CordovaPlugin {
 	ArrayList<NativePage> pages;
 	NativePage currentPage;
 
+	
 	static CallbackContext eventsCallbackContext;
 
 	// HashMap<String,Integer> idControls;
@@ -125,6 +126,28 @@ public class NativeUI extends CordovaPlugin {
 
 	}
 
+	private View findControl(String query,ViewGroup viewGroup){
+		
+		View control = null;
+		
+		for (int i = 0; i < viewGroup.getChildCount(); i++) {
+			
+			View tmp = viewGroup.getChildAt(0);
+			Object tag = tmp.getTag();
+			if(tag != null && tag instanceof NativeUIControl){
+				NativeUIControl ctrl = (NativeUIControl)tag;
+				if(ctrl.controlId.equals(query))
+				{
+					control = tmp;
+					break;
+				}
+			}
+		}	
+		
+		return control;
+		
+	}
+	
 	private void setValueAsync(String controlName, final String propertyName, final String propertyValue, CallbackContext callbackContext) {
 		try {
 
@@ -132,7 +155,7 @@ public class NativeUI extends CordovaPlugin {
 
 				// final View view =
 				// currentPage.fragment.getView().findViewById(stringToInteger(controlID));
-				final View view = currentPage.fragment.getView().findViewWithTag(controlName);
+				final View view = findControl(controlName, (ViewGroup)currentPage.fragment.getView());
 
 				cordova.getActivity().runOnUiThread(new Runnable() {
 					public void run() {
@@ -268,9 +291,9 @@ public class NativeUI extends CordovaPlugin {
 		return (new java.math.BigInteger(str.getBytes())).intValue();
 	}
 
-	public static View parseXML(NodeList childNodes, Context context) {
+	public static View parseXML(ViewGroup container,NodeList childNodes, Context context) {
 
-		LinearLayout layout = new LinearLayout(context);
+		//LinearLayout layout = new LinearLayout(context);
 
 
 		for (int i = 0; i < childNodes.getLength(); i++) {
@@ -280,17 +303,19 @@ public class NativeUI extends CordovaPlugin {
 			if (node.getNodeType() == Node.ELEMENT_NODE) {
 
 				Element xmlElement = (Element)node;
-				String nodeName = xmlElement.getNodeName();
+				String nodeName = xmlElement.getNodeName().toLowerCase();
 
 				NativeUIControl control = NativeUIMapper.getControlFor(nodeName);
 				if(control != null){
 					View nativeView = control.getNativeView(xmlElement, context);
-					layout.addView(nativeView);
+					if(nativeView != null){
+						container.addView(nativeView);
+					}
 				}
 			}
 		}
 
-		return layout;
+		return container;
 
 	}
 
@@ -300,7 +325,10 @@ public class NativeUI extends CordovaPlugin {
 			@Override
 			public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-				return parseXML(xmlParser.getChildNodes(), container.getContext());
+				LinearLayout layout = new LinearLayout(container.getContext());
+				layout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
+				return parseXML(layout,xmlParser.getChildNodes(), container.getContext());
 
 				// LinearLayout layout = new LinearLayout(activity);
 
@@ -468,7 +496,17 @@ class NativePage {
 	String path;
 }
 
-interface NativeUIControl {
+abstract class NativeUIControl {
 
-	View getNativeView(Element xmlElement, Context context);
+	String controlId;
+	String controlClass;
+	
+	public void parseCommonAttributes(View control,Element xmlElement){
+		
+		controlId = "#".concat(xmlElement.getAttribute("id"));
+		
+		control.setTag(this);
+	}
+	
+	View getNativeView(Element xmlElement, Context context){return null;}
 }
