@@ -1,0 +1,6 @@
+<page>
+	<page.container mode="vertical">
+		<text content="Welcome " font-size="18" align="center"/>
+		<text id="txUserName" content="{name}" font-size="36" align="center"/>
+	</page.container>
+</page>

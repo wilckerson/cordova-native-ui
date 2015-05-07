@@ -1,0 +1,7 @@
+<page>
+	<page.container mode="vertical">
+		<text content="Who are you?"/>
+		<textBox id="tbxName" placeholder="Type your name..."/>
+	    <button id="btnSubmit" content="Submit"/>
+	</page.container>
+</page>
