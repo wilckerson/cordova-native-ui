@@ -1,11 +1,21 @@
 package com.wilckerson.nativeui_androidrender;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.wilckerson.native_ui.NativeUI;
+import com.wilckerson.native_ui.NativeUIFragment;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -19,11 +29,20 @@ public class MainActivity extends ActionBarActivity {
         //setContentView(R.layout.activity_main);
 
         if(savedInstanceState == null) {
-            nui = new NativeUI(this);
+              nui = new NativeUI(this);
 
             nui.loadPage("whoareyou.xml");
-        }
+            //}
 
+//            Fragment frag = new NativeUIFragment();
+//            FragmentManager fm = this.getFragmentManager();
+//            FragmentTransaction ft = fm.beginTransaction();
+//
+//            ft.replace(android.R.id.content, frag);
+//            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+//
+//            ft.commit();
+        }
 
     }
 

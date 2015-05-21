@@ -18,11 +18,12 @@ public class NativeUIParser {
 
     public static Fragment getFragmentFromXML(final Document xmlParser) {
 
-        Fragment frag = new NativeUIFragment(xmlParser);
+        NativeUIFragment frag = new NativeUIFragment();
+        //frag.setContent(xmlParser);
 
-        Bundle b = new Bundle();
-        b.put
-       frag.setArguments(new Bundle().);
+//        Bundle b = new Bundle();
+//        b.put
+//       frag.setArguments(new Bundle().);
         return frag;
     }
 
@@ -32,7 +33,7 @@ public class NativeUIParser {
 
         //LinearLayout layout = new LinearLayout(context);
 
-
+int baseId = 1680;
         for (int i = 0; i < childNodes.getLength(); i++) {
 
             Node node = childNodes.item(i);
@@ -45,6 +46,8 @@ public class NativeUIParser {
                 NativeUIControl control = NativeUIMapper.getControlFor(nodeName);
                 if(control != null){
                     View nativeView = control.getNativeView(xmlElement, context);
+                    nativeView.setId(baseId + i);
+
                     if(nativeView != null){
                         container.addView(nativeView);
                     }
