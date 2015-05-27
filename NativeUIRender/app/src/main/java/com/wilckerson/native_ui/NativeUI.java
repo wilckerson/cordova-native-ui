@@ -19,6 +19,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.FragmentManager;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,46 +70,49 @@ public class NativeUI {
 
     public void loadPage(String path) {
 
-        try {
-            path = path.toLowerCase();
+        path = path.toLowerCase();
 
-            // Verify if this page already exist
-            NativePage page = getPage(path);
+        // Verify if this page already exist
+        NativePage page = getPage(path);
 
-            if (page == null) { // If doesnt exist
+        if (page == null) { // If doesnt exist
 
-                // Load the XML file
-                InputStream stream = activity.getAssets().open("www/nativeui/" + path);
+            // Load the XML file
+            //Document xmlParser = loadXML(path, activity);
 
-                //Instantiating the xml parser
-                DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-                Document xmlParser = builder.parse(stream);
+            //Fragment that will receive the native controls parsed from the xml
+            //The parser will run inside fragment method called onCreateView
+            Fragment frag = new NativeUIFragment();
 
-                //Fragment that will receive the native controls parsed from the xml
-                //The parser will run inside fragment method called onCreateView
-                Fragment frag = new NativeUIFragment(xmlParser);
+            Bundle b = new Bundle();
+            b.putString("currentPage", path);
+            frag.setArguments(b);
 
-                // Create the page with generated fragment
-                page = new NativePage();
-                page.fragment = frag;
-                page.path = path;
-                page.activity = activity;
+            // Create the page with generated fragment
+            page = new NativePage();
+            page.fragment = frag;
+            page.path = path;
+            page.activity = activity;
 
-                // Store the page in ArrayList
-                pages.add(page);
-            }
-
-            // Navigate to page
-            navigateToPage(page);
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
+            // Store the page in ArrayList
+            pages.add(page);
         }
 
+        // Navigate to page
+        navigateToPage(page);
+
+
+    }
+
+    public static Document loadXML(String path, Context context) throws
+            IOException, ParserConfigurationException, SAXException {
+        InputStream stream = null;
+
+        stream = context.getAssets().open("www/nativeui/" + path);
+
+
+        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        return builder.parse(stream);
     }
 
     private void navigateToPage(NativePage page) {
@@ -116,6 +120,7 @@ public class NativeUI {
 
         // Nativage to the fragment of page
         FragmentTransaction ft = fm.beginTransaction();
+
 
         ft.replace(android.R.id.content, page.fragment);
 

@@ -29,10 +29,12 @@ public class NativeUIContainer extends NativeUIControl {
 			//Default value
 			container.setOrientation(LinearLayout.VERTICAL);
 		}
+
+		//Parsing childs and putting on container
+		View computedContainer = NativeUIParser.getViewFromXML(container,xmlElement.getChildNodes(), context);
 		
-		View childView = NativeUIParser.getViewFromXML(container, xmlElement.getChildNodes(), context);
-		
-		return container;
+
+		return computedContainer;
 	}
 
 }
