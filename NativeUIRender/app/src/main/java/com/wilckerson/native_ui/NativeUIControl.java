@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
 /**
  * Created by Wilckerson on 06/05/2015.
  */
-abstract class NativeUIControl {
+public abstract class NativeUIControl {
 
 	String controlId;
 	String controlClass;
@@ -20,5 +20,5 @@ abstract class NativeUIControl {
 		control.setTag(this);
 	}
 
-	View getNativeView(Element xmlElement, Context context){return null;}
+	public View getNativeView(Element xmlElement, Context context){return null;}
 }

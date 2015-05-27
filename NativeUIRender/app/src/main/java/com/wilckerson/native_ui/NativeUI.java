@@ -28,108 +28,107 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-public class NativeUI{
+public class NativeUI {
 
-	Fragment frag;
-	Fragment frag2;
-	LinearLayout fragContainer;
-	Activity activity;
-	FragmentManager fm;
-	ArrayList<NativePage> pages;
-	NativePage currentPage;
+    Fragment frag;
+    Fragment frag2;
+    LinearLayout fragContainer;
+    Activity activity;
+    FragmentManager fm;
+    ArrayList<NativePage> pages;
+    NativePage currentPage;
 
-	public NativeUI(Activity activity){
+    public NativeUI(Activity activity) {
 
-		this.activity = activity;
-		fm = activity.getFragmentManager();
+        this.activity = activity;
+        fm = activity.getFragmentManager();
 
-		// Initializing the list of pages
-		pages = new ArrayList<NativePage>();
-	}
+        // Initializing the list of pages
+        pages = new ArrayList<NativePage>();
+    }
 
-	public void hide() {
+    public void hide() {
 
-			if (currentPage != null) {
-				fm.beginTransaction().remove(currentPage.fragment).commit();
-				currentPage = null;
-			}
-	}
+        if (currentPage != null) {
+            fm.beginTransaction().remove(currentPage.fragment).commit();
+            currentPage = null;
+        }
+    }
 
-	private NativePage getPage(String path) {
+    private NativePage getPage(String path) {
 
-		for (NativePage page : pages) {
-			if (page.path.equals(path)) {
-				return page;
-			}
-		}
+        for (NativePage page : pages) {
+            if (page.path.equals(path)) {
+                return page;
+            }
+        }
 
-		return null;
-	}
-
-
-	public void loadPage(String path) {
-
-		try {
-			path = path.toLowerCase();
-
-			// Verify if this page already exist
-			NativePage page = getPage(path);
-
-			if (page == null) { // If doesnt exist
-
-				// Load the XML file
-				InputStream stream = null;
-
-					stream = activity.getAssets().open("www/nativeui/" + path);
+        return null;
+    }
 
 
-				DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-				Document xmlParser = builder.parse(stream);
+    public void loadPage(String path) {
 
-				// Parse the XML to generate native controls inside Fragment
-				Fragment frag = NativeUIParser.getFragmentFromXML(xmlParser);
+        try {
+            path = path.toLowerCase();
 
-				// Create the page with generated fragment
-				page = new NativePage();
-				page.fragment = frag;
-				page.path = path;
-				page.activity = activity;
+            // Verify if this page already exist
+            NativePage page = getPage(path);
 
-				// Store the page in ArrayList
-				pages.add(page);
-			}
+            if (page == null) { // If doesnt exist
 
-			// Navigate to page
-			navigateToPage(page);
-			} catch (IOException e) {
-			e.printStackTrace();
+                // Load the XML file
+                InputStream stream = activity.getAssets().open("www/nativeui/" + path);
 
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		}
+                //Instantiating the xml parser
+                DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+                Document xmlParser = builder.parse(stream);
 
-	}
+                //Fragment that will receive the native controls parsed from the xml
+                //The parser will run inside fragment method called onCreateView
+                Fragment frag = new NativeUIFragment(xmlParser);
 
-	private void navigateToPage(NativePage page) {
+                // Create the page with generated fragment
+                page = new NativePage();
+                page.fragment = frag;
+                page.path = path;
+                page.activity = activity;
+
+                // Store the page in ArrayList
+                pages.add(page);
+            }
+
+            // Navigate to page
+            navigateToPage(page);
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void navigateToPage(NativePage page) {
 
 
-			// Nativage to the fragment of page
-			FragmentTransaction ft = fm.beginTransaction();
+        // Nativage to the fragment of page
+        FragmentTransaction ft = fm.beginTransaction();
 
-			ft.replace(android.R.id.content, page.fragment);
+        ft.replace(android.R.id.content, page.fragment);
 
-			if (pages.size() > 1) {
-				ft.addToBackStack(null);
-			}
+        if (pages.size() > 1) {
+            ft.addToBackStack(null);
+        }
 
-			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
-			ft.commit();
+        ft.commit();
 
-			currentPage = page;
-	}
+        currentPage = page;
+    }
 
 
 }

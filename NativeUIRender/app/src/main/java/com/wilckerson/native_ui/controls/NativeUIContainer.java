@@ -1,4 +1,4 @@
-package com.wilckerson.native_ui;
+package com.wilckerson.native_ui.controls;
 
 import org.w3c.dom.Element;
 
@@ -8,7 +8,10 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 
-public class NativeUIContainer extends NativeUIControl{
+import com.wilckerson.native_ui.NativeUIControl;
+import com.wilckerson.native_ui.NativeUIParser;
+
+public class NativeUIContainer extends NativeUIControl {
 
 	@Override
 	public View getNativeView(Element xmlElement, Context context) {
@@ -27,7 +30,7 @@ public class NativeUIContainer extends NativeUIControl{
 			container.setOrientation(LinearLayout.VERTICAL);
 		}
 		
-		View childView = NativeUIParser.getViewFromXML(container,xmlElement.getChildNodes(), context);
+		View childView = NativeUIParser.getViewFromXML(container, xmlElement.getChildNodes(), context);
 		
 		return container;
 	}

@@ -1,5 +1,6 @@
 package com.wilckerson.native_ui;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,11 +18,15 @@ import org.w3c.dom.Node;
 
 public class NativeUIFragment extends Fragment {
 
-    //private Document xmlParser;
+    private Document xmlParser;
 
     public NativeUIFragment(){}
 
-    @Nullable
+    @SuppressLint("ValidFragment")
+    public NativeUIFragment(Document xmlParser){
+        this.xmlParser = xmlParser;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

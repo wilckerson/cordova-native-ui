@@ -1,4 +1,4 @@
-package com.wilckerson.native_ui;
+package com.wilckerson.native_ui.controls;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 
-class NativeUIButton extends NativeUIControl implements OnClickListener {
+import com.wilckerson.native_ui.NativeUIControl;
+
+public class NativeUIButton extends NativeUIControl implements OnClickListener {
 
 	@Override
 	public View getNativeView(Element xmlElement, Context context) {

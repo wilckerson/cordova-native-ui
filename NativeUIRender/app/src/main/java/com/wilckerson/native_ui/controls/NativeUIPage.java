@@ -1,4 +1,4 @@
-package com.wilckerson.native_ui;
+package com.wilckerson.native_ui.controls;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -7,7 +7,10 @@ import org.w3c.dom.NodeList;
 import android.content.Context;
 import android.view.View;
 
-public class NativeUIPage extends NativeUIControl{
+import com.wilckerson.native_ui.NativeUIControl;
+import com.wilckerson.native_ui.controls.NativeUIContainer;
+
+public class NativeUIPage extends NativeUIControl {
 
 	@Override
 	public View getNativeView(Element xmlElement, Context context) {

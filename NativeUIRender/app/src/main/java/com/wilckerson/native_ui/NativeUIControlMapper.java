@@ -1,6 +1,11 @@
 package com.wilckerson.native_ui;
 
-public class NativeUIMapper{
+import com.wilckerson.native_ui.controls.NativeUIButton;
+import com.wilckerson.native_ui.controls.NativeUIPage;
+import com.wilckerson.native_ui.controls.NativeUIText;
+import com.wilckerson.native_ui.controls.NativeUITextBox;
+
+public class NativeUIControlMapper {
 	
 	public static NativeUIControl getControlFor(String xmlNodeName){
 		

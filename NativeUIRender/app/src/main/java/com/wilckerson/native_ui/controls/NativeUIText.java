@@ -1,4 +1,4 @@
-package com.wilckerson.native_ui;
+package com.wilckerson.native_ui.controls;
 
 import org.w3c.dom.Element;
 
@@ -6,7 +6,9 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
-public class NativeUIText extends NativeUIControl{
+import com.wilckerson.native_ui.NativeUIControl;
+
+public class NativeUIText extends NativeUIControl {
 
 	@Override
 	public View getNativeView(Element xmlElement, Context context) {
