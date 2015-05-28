@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 
+import com.wilckerson.native_ui.NativeUI;
 import com.wilckerson.native_ui.NativeUIControl;
+import com.wilckerson.native_ui.NativeUIManager;
 
 public class NativeUIButton extends NativeUIControl implements OnClickListener {
 
@@ -20,7 +22,7 @@ public class NativeUIButton extends NativeUIControl implements OnClickListener {
 
 		Button btn = new Button(context);
 		
-		super.parseCommonAttributes(btn, xmlElement);
+		//super.parseCommonAttributes(btn, xmlElement);
 
 		String content = xmlElement.getAttribute("content");
 		if (content != null && !content.isEmpty()) {
@@ -35,11 +37,22 @@ public class NativeUIButton extends NativeUIControl implements OnClickListener {
 	}
 
 	@Override
+	public String getPropertyValue(String propertyName) {
+		return null;
+	}
+
+	@Override
+	public void setPropertyValue(String propertyName, String propertyValue) {
+
+	}
+
+	@Override
 	public void onClick(View arg0) {
 
 		String eventName = "click";
+		//String controlId = arg0.getTag().toString();
 
-		//NativeUI.broadcastEvent(super.controlId, eventName);
+		NativeUIManager.broadcastEvent(super.controlId, eventName);
 
 	}
 

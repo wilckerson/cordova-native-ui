@@ -26,4 +26,14 @@ public class NativeUIText extends NativeUIControl {
 		return tx;
 	}
 
+	@Override
+	public String getPropertyValue(String propertyName) {
+		return null;
+	}
+
+	@Override
+	public void setPropertyValue(String propertyName, String propertyValue) {
+
+	}
+
 }

@@ -40,4 +40,14 @@ public class NativeUIPage extends NativeUIControl {
 		
 	}
 
+	@Override
+	public String getPropertyValue(String propertyName) {
+		return null;
+	}
+
+	@Override
+	public void setPropertyValue(String propertyName, String propertyValue) {
+
+	}
+
 }

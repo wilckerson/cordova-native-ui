@@ -40,6 +40,11 @@ public class NativeUIParser {
                     View nativeView = control.getNativeView(xmlElement, context);
                     nativeView.setId(baseId + i);
 
+                    String xmlId = "#".concat(xmlElement.getAttribute("id"));
+                    control.controlId = xmlId;
+                    //String controlId = String.format("%s_#%s",nodeName,xmlId);
+                    nativeView.setTag(control);
+
                     if (nativeView != null) {
                         container.addView(nativeView);
                     }

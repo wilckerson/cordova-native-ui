@@ -3,6 +3,10 @@ package com.wilckerson.native_ui;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 
 import javax.xml.parsers.DocumentBuilder;
@@ -34,10 +38,11 @@ public class NativeUI {
     Fragment frag;
     Fragment frag2;
     LinearLayout fragContainer;
-    Activity activity;
+    public Activity activity;
     FragmentManager fm;
     ArrayList<NativePage> pages;
     NativePage currentPage;
+
 
     public NativeUI(Activity activity) {
 
@@ -46,6 +51,8 @@ public class NativeUI {
 
         // Initializing the list of pages
         pages = new ArrayList<NativePage>();
+
+        NativeUIManager.nativeUI = this;
     }
 
     public void hide() {
@@ -124,7 +131,7 @@ public class NativeUI {
 
         ft.replace(android.R.id.content, page.fragment);
 
-        if (pages.size() > 1) {
+        if(pages.size() > 1) {
             ft.addToBackStack(null);
         }
 

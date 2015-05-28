@@ -10,15 +10,17 @@ import org.w3c.dom.Element;
  */
 public abstract class NativeUIControl {
 
-	String controlId;
+	public String controlId;
 	String controlClass;
 
-	public void parseCommonAttributes(View control,Element xmlElement){
+//	public void parseCommonAttributes(View control,Element xmlElement){
+//
+//		controlId = "#".concat(xmlElement.getAttribute("id"));
+//
+//		control.setTag(this);
+//	}
 
-		controlId = "#".concat(xmlElement.getAttribute("id"));
-
-		control.setTag(this);
-	}
-
-	public View getNativeView(Element xmlElement, Context context){return null;}
+	public abstract View getNativeView(Element xmlElement, Context context);
+	public abstract String getPropertyValue(String propertyName);
+	public abstract void setPropertyValue(String propertyName, String propertyValue);
 }

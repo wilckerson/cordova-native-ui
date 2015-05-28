@@ -13,9 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.wilckerson.native_ui.NativeUI;
+import com.wilckerson.native_ui.NativeUIEvent;
 import com.wilckerson.native_ui.NativeUIFragment;
+import com.wilckerson.native_ui.NativeUIManager;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -28,20 +31,28 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
 
-        if(savedInstanceState == null) {
-              nui = new NativeUI(this);
+        if (savedInstanceState == null) {
+            nui = new NativeUI(this);
 
             nui.loadPage("whoareyou.xml");
-            //}
 
-//            Fragment frag = new NativeUIFragment();
-//            FragmentManager fm = this.getFragmentManager();
-//            FragmentTransaction ft = fm.beginTransaction();
-//
-//            ft.replace(android.R.id.content, frag);
-//            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-//
-//            ft.commit();
+            NativeUIManager.addEventListener("#btnSubmit", "click", new NativeUIEvent() {
+                @Override
+                public void onExecute() {
+
+                    String name = NativeUIManager.getValue("#tbxName","text");
+
+                    if(name == null || name.isEmpty()){
+                        Toast toast = Toast.makeText(nui.activity, "Please, enter your name", Toast.LENGTH_SHORT);
+                        toast.show();
+                        return;
+                    }
+
+                    nui.loadPage("welcome.xml");
+                    NativeUIManager.setValue("#txUserName","text",name);
+
+                }
+            });
         }
 
     }

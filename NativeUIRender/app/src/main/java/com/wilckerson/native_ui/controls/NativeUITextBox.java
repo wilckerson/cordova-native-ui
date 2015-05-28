@@ -10,6 +10,8 @@ import com.wilckerson.native_ui.NativeUIControl;
 
 public class NativeUITextBox extends NativeUIControl {
 
+	EditText tbx;
+
 	@Override
 	public View getNativeView(Element xmlElement, Context context) {
 	
@@ -18,7 +20,7 @@ public class NativeUITextBox extends NativeUIControl {
 		String content = xmlElement.getAttribute("content");
 		
 		//Creating the native control
-		EditText tbx = new EditText(context);
+		tbx = new EditText(context);
 		
 		if(placeholder != null && !placeholder.isEmpty()){
 			tbx.setHint(placeholder);
@@ -29,5 +31,24 @@ public class NativeUITextBox extends NativeUIControl {
 		}
 		
 		return tbx;
+	}
+
+	@Override
+	public String getPropertyValue(String propertyName){
+		String value = null;
+
+		if(propertyName == "text"){
+			value = tbx.getText().toString();
+		}
+
+		return value;
+	}
+
+	@Override
+	public void setPropertyValue(String propertyName, String propertyValue) {
+
+		if(propertyName == "text"){
+			tbx.setText(propertyValue);
+		}
 	}
 }
