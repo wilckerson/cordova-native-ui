@@ -8,28 +8,17 @@ import android.widget.EditText;
 
 import com.wilckerson.native_ui.NativeUIControl;
 
+
 public class NativeUITextBox extends NativeUIControl {
 
 	EditText tbx;
 
 	@Override
 	public View getNativeView(Element xmlElement, Context context) {
-	
-		//Parsing properties
-		String placeholder = xmlElement.getAttribute("placeholder");
-		String content = xmlElement.getAttribute("content");
-		
+
 		//Creating the native control
 		tbx = new EditText(context);
-		
-		if(placeholder != null && !placeholder.isEmpty()){
-			tbx.setHint(placeholder);
-		}
-		
-		if(content != null && !content.isEmpty()){
-			tbx.setText(placeholder);
-		}
-		
+
 		return tbx;
 	}
 
@@ -37,8 +26,11 @@ public class NativeUITextBox extends NativeUIControl {
 	public String getPropertyValue(String propertyName){
 		String value = null;
 
-		if(propertyName == "text"){
+		if(propertyName.equals("content")){
 			value = tbx.getText().toString();
+		}
+		else if(propertyName.equals("placeholder")){
+			value = tbx.getHint().toString();
 		}
 
 		return value;
@@ -47,8 +39,11 @@ public class NativeUITextBox extends NativeUIControl {
 	@Override
 	public void setPropertyValue(String propertyName, String propertyValue) {
 
-		if(propertyName == "text"){
+		if(propertyName.equals("content")){
 			tbx.setText(propertyValue);
+		}
+		else if(propertyName.equals("placeholder")){
+			tbx.setHint(propertyValue);
 		}
 	}
 }

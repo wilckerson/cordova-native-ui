@@ -3,10 +3,6 @@ package com.wilckerson.native_ui;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 
 import javax.xml.parsers.DocumentBuilder;
@@ -25,12 +21,6 @@ import android.app.FragmentManager;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 
 public class NativeUI {
@@ -132,12 +122,14 @@ public class NativeUI {
         ft.replace(android.R.id.content, page.fragment);
 
         if(pages.size() > 1) {
-            ft.addToBackStack(null);
+            ft.addToBackStack(currentPage.path);
         }
 
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
         ft.commit();
+        fm.executePendingTransactions();
+
 
         currentPage = page;
     }

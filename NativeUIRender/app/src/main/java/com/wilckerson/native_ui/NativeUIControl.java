@@ -11,14 +11,6 @@ import org.w3c.dom.Element;
 public abstract class NativeUIControl {
 
 	public String controlId;
-	String controlClass;
-
-//	public void parseCommonAttributes(View control,Element xmlElement){
-//
-//		controlId = "#".concat(xmlElement.getAttribute("id"));
-//
-//		control.setTag(this);
-//	}
 
 	public abstract View getNativeView(Element xmlElement, Context context);
 	public abstract String getPropertyValue(String propertyName);

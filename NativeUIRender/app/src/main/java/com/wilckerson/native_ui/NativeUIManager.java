@@ -2,8 +2,6 @@ package com.wilckerson.native_ui;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -78,7 +76,7 @@ public class NativeUIManager {
     public static String getValue(String controlId, String propertyName) {
 
         String value = null;
-
+//TODO: After change rotation the method fragment.getView returns null
         ViewGroup viewGroup = (ViewGroup)nativeUI.currentPage.fragment.getView();
         List<NativeUIControl> controls = findControlsById(viewGroup, controlId, true);
 

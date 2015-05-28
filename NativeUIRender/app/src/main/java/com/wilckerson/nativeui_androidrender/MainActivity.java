@@ -35,12 +35,13 @@ public class MainActivity extends ActionBarActivity {
             nui = new NativeUI(this);
 
             nui.loadPage("whoareyou.xml");
+            //nui.loadPage("welcome.xml");
 
             NativeUIManager.addEventListener("#btnSubmit", "click", new NativeUIEvent() {
                 @Override
                 public void onExecute() {
 
-                    String name = NativeUIManager.getValue("#tbxName","text");
+                    String name = NativeUIManager.getValue("#tbxName","content");
 
                     if(name == null || name.isEmpty()){
                         Toast toast = Toast.makeText(nui.activity, "Please, enter your name", Toast.LENGTH_SHORT);
@@ -49,7 +50,7 @@ public class MainActivity extends ActionBarActivity {
                     }
 
                     nui.loadPage("welcome.xml");
-                    NativeUIManager.setValue("#txUserName","text",name);
+                    NativeUIManager.setValue("#txUserName","content",name);
 
                 }
             });

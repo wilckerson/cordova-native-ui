@@ -10,30 +10,36 @@ import com.wilckerson.native_ui.NativeUIControl;
 
 public class NativeUIText extends NativeUIControl {
 
+	TextView tx;
+
 	@Override
 	public View getNativeView(Element xmlElement, Context context) {
-	
-		//Parsing properties
-		String content = xmlElement.getAttribute("content");
-		
+
 		//Creating the native control
-		TextView tx = new TextView(context);
-		
-		if(content != null && !content.isEmpty()){
-			tx.setText(content);
-		}
+		 tx = new TextView(context);
+
 		
 		return tx;
 	}
 
 	@Override
 	public String getPropertyValue(String propertyName) {
-		return null;
+
+		String value = null;
+		if(propertyName.equals("content")) {
+			value = tx.getText().toString();
+		}
+
+		return value;
+
 	}
 
 	@Override
 	public void setPropertyValue(String propertyName, String propertyValue) {
 
+		if(propertyName.equals("content")){
+			tx.setText(propertyValue);
+		}
 	}
 
 }
